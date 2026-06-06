@@ -1,6 +1,7 @@
 from itertools import product
 from math import sqrt
 
+from gmpy2 import gcd
 from sympy import factorint
 from sympy.external.gmpy import is_square
 
@@ -21,6 +22,10 @@ def divisors_of(n, include_self=True):
             divisors.append(d)
 
     return divisors
+
+
+def coprimes_to(n):
+    return [i for i in range(1, n) if gcd(i, n) == 1]
 
 
 def get_pentagonal_index(n):
