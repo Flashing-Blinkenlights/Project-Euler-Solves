@@ -14,19 +14,30 @@ POSSIBLE_FINAL_DIGITS: list[str] = list(map(str, [3, 7]))
 # observation: it is stated there are only 11 possible primes, hence we should stop after finding 11 primes
 # observation: only 2-digit+ values are valid tructable primes
 
-def generate_appended_primes(n, digit_pool : list[str] = POSSIBLE_INTERMEDIATE_DIGITS):
+
+def generate_appended_primes(
+    n: str, digit_pool: list[str] = POSSIBLE_INTERMEDIATE_DIGITS
+):
     candidates: list[str] = []
-    
+
     for d in POSSIBLE_INTERMEDIATE_DIGITS:
-        if is_prime(int(n+d)):
-            candidates.append(n+d)
-            candidates = candidates + generate_appended_primes(n+d)
+        if is_prime(int(n + d)):
+            candidates.append(n + d)
+            candidates = candidates + generate_appended_primes(n + d)
+
+    return candidates
 
 
-truncatable_primes = set()
-
+truncatable_primes = []
 
 for d1 in POSSIBLE_STARTING_DIGITS:
-    
+    for p in generate_appended_primes(d1):
+        if p[-1] in POSSIBLE_FINAL_DIGITS:
+            for i in range(1, len(p)):
+                if not is_prime(int(p[i:])):
+                    break
+            else:
+                truncatable_primes.append(int(p))
+                print(p)
 
 print(sum(truncatable_primes))

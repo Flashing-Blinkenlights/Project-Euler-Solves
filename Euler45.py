@@ -11,7 +11,7 @@ STARTING_VALUES = 285, 165, 143
 
 from math import isqrt
 
-from euler_tools import get_pentagonal_index
+from euler_tools import get_pentagonal_index, is_square
 
 LIMIT = 10e9
 
@@ -22,12 +22,6 @@ def nth_hex_number(n):
 
 def tri_index_from_hex_index(n):
     return n * 2 - 1
-
-
-def is_square(n):
-    r = isqrt(n)
-    return r**2 == n
-
 
 hex_n = STARTING_VALUES[2] - 1
 hexnumber = nth_hex_number(hex_n)

@@ -1,13 +1,6 @@
 # observation: the best numbers will all be coprime to 10
 
-from euler_tools import divisors_of
-
-
-def is_coprime(a, b):
-    return set(divisors_of(a)) & set(divisors_of(b)) == {
-        1,
-    }
-
+from euler_tools import is_coprime
 
 LIMIT = 1000
 

@@ -1,15 +1,11 @@
 # perimeter of the largest possible triangle
 from math import isqrt
+from euler_tools import is_square
 
 # observation: don't need to calculate the area, only prove that it's integral
 
 LIMIT = 1_000_000_000
 OFFSETS = {-1, 1}
-
-
-def is_square(n: int):
-    r = isqrt(n)
-    return r**2 == n
 
 
 def is_isoscelese_with_integral_area(s1: int, s2: int):
