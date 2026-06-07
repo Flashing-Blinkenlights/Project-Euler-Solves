@@ -22,6 +22,47 @@ def print_update(value: str, seconds: float = 0.5):
     if int(100000 * perf_counter()) % int(100000 * seconds) == 0:
         print(value, end="\r")
 
+ROMAN_DIGITS_TO_DECIMAL = {
+    "I": 1,
+    "IV": 4,
+    "V": 5,
+    "IX": 9,
+    "X": 10,
+    "XL": 40,
+    "L": 50,
+    "XC": 90,
+    "C": 100,
+    "CD": 400,
+    "D": 500,
+    "CM": 900,
+    "M": 1000,
+}
+
+DECIMAL_TO_ROMAN_DIGITS = {val: key for key, val in ROMAN_DIGITS_TO_DECIMAL.items()}
+
+
+def roman_to_decimal(numeral):
+    sequence = [ROMAN_DIGITS_TO_DECIMAL[char] for char in numeral]
+    for i in range(len(sequence) - 1):
+        if sequence[i] < sequence[i + 1]:  # identified a subtractive combination
+            sequence[
+                i
+            ] *= -1  # according to rules, only e.g. XIX and not XIIIX are permitted
+    return sum(sequence)
+
+
+def decimal_to_roman(n):
+    global roman_numbers
+
+    result = ""
+
+    for value in reversed(DECIMAL_TO_ROMAN_DIGITS.keys()):
+        while n >= value:
+            n -= value
+            result += DECIMAL_TO_ROMAN_DIGITS[value]
+
+    return result
+
 
 def divisors_of(n, include_self=True):
     factors = factorint(n)  # {prime: exponent}
