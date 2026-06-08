@@ -9,14 +9,17 @@ VALID_SUCCESSORS = [
     {'I', 'V', 'X', 'L', 'C', 'D', 'M'},
     {'I': {'I', 'V'}}, {'V': {'I'}}]
 
-ROMAN_NUMERALS = ['M', 'D', 'C', 'L', 'X', 'V', 'I']
+ROMAN_UNITS = ['M', 'C', 'X', 'I']
+ROMAN_FIVES = ['D', 'L', 'V']
+ROMAN_NUMERALS = 
 
 VALID_SUCCESSORS = [{k: v} for i, k in enumerate(ROMAN_NUMERALS) for v in ROMAN_NUMERALS[i:]]
 
 VALID_SUCCESSORS = {
     "": set(ROMAN_NUMERALS),
-    
     } # case with no characters: it doesn't matter
+
+VALID_SUCCESSORS.update({})
 
 VALID_PAIRS = [
     "II", "IV", "IX",
