@@ -5,6 +5,19 @@ from euler_tools import decimal_to_roman, roman_to_decimal
 
 ALLOWED_TIME = 30
 
+VALID_SUCCESSORS = [
+    {'I', 'V', 'X', 'L', 'C', 'D', 'M'},
+    {'I': {'I', 'V'}}, {'V': {'I'}}]
+
+ROMAN_NUMERALS = ['M', 'D', 'C', 'L', 'X', 'V', 'I']
+
+VALID_SUCCESSORS = [{k: v} for i, k in enumerate(ROMAN_NUMERALS) for v in ROMAN_NUMERALS[i:]]
+
+VALID_SUCCESSORS = {
+    "": set(ROMAN_NUMERALS),
+    
+    } # case with no characters: it doesn't matter
+
 VALID_PAIRS = [
     "II", "IV", "IX",
     "VI",
@@ -34,6 +47,10 @@ while perf_counter() - start_time < ALLOWED_TIME:
 
         current_numeral = ""
         continue
+
+    if next_char not in VALID_SUCCESSORS[len(current_numeral)]:
+        continue
+
 
     # check for invalid next_char
     if len(current_numeral) != 0:
